@@ -2,102 +2,94 @@ import streamlit as st
 import base64
 import os
 
-# Page Configuration
+# ------------------------------------------------
+# Configure the main page
+# ------------------------------------------------
 st.set_page_config(
     page_title="Sravanthi Akutota | Portfolio",
     layout="wide",
-    initial_sidebar_state="expanded"
 )
 
-# --- Sidebar Navigation ---
-st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Identity", "Resume", "Projects", "Contact"])
+# ------------------------------------------------
+# Helper Functions (Your "Pages")
+# ------------------------------------------------
 
-# --- Custom Styling ---
-st.markdown("""
-    <style>
-        .title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #2E86C1;
-        }
-        .subtitle {
-            font-size: 1.2rem;
-            color: #566573;
-            margin-bottom: 20px;
-        }
-        .section {
-            background-color: #FBFCFC;
-            padding: 20px;
-            border-radius: 12px;
-        }
-        .footer {
-            text-align: center;
-            font-size: 0.8rem;
-            color: gray;
-            margin-top: 4rem;
-        }
-    </style>
-""", unsafe_allow_html=True)
+def show_identity():
+    """Identity (Home) Section"""
+    st.title("Sravanthi Akutota")
+    st.write("M.S. in Learning Technologies | University of North Texas")
 
-# --- Identity Page ---
-if page == "Identity":
-    st.markdown('<div class="title">Sravanthi Akutota</div>', unsafe_allow_html=True)
-    st.markdown('<div class="subtitle">M.S. in Learning Technologies | University of North Texas</div>', unsafe_allow_html=True)
-
-    col1, col2 = st.columns([1, 3])
+    col1, col2 = st.columns([1, 2])
     with col1:
         if os.path.exists("profile.jpeg"):
             st.image("profile.jpeg", width=200, caption="Sravanthi Akutota")
         else:
             st.warning("'profile.jpeg' not found. Please add a professional headshot.")
-    with col2:
-        st.markdown("""
-        <div class="section">
-        I am passionate about integrating technology and education to create impactful learning experiences. 
-        I am currently pursuing my master’s degree in Learning Technologies, with a background in Electrical 
-        and Electronics Engineering. In my previous role at Google AdWords, I gained valuable experience in 
-        content management and data analysis.
-        </div>
-        """, unsafe_allow_html=True)
 
-# --- Resume Page ---
-elif page == "Resume":
-    st.subheader("My Resume")
-    st.markdown("You can view the entire resume below and also download a copy.")
+    with col2:
+        st.subheader("About Me")
+        st.write("""
+            I am passionate about integrating technology and education to create impactful 
+            learning experiences. I am currently pursuing my master's degree in Learning 
+            Technologies, with a background in Electrical and Electronics Engineering.
+
+            I also have experience in content management and data analysis from my time at 
+            Google AdWords. Please use the menu to learn more about my resume, projects, 
+            and how to get in touch.
+        """)
+
+def show_resume():
+    """Resume Section (PDF Viewer and Download)"""
+    st.title("Resume")
+    st.write("Below is my resume, with an option to download.")
 
     resume_path = "resume.pdf"
     if os.path.exists(resume_path):
-        with open(resume_path, "rb") as file:
-            resume_data = file.read()
-            st.download_button("Download Resume", data=resume_data, file_name="Sravanthi_Resume.pdf", mime="application/pdf")
+        with open(resume_path, "rb") as f:
+            resume_data = f.read()
+            # Download button
+            st.download_button(
+                label="Download Resume",
+                data=resume_data,
+                file_name="Sravanthi_Resume.pdf",
+                mime="application/pdf"
+            )
 
-            # Encode and embed PDF
-            b64_pdf = base64.b64encode(resume_data).decode('utf-8')
-            pdf_display = f'<iframe src="data:application/pdf;base64,{b64_pdf}" width="100%" height="700px" type="application/pdf"></iframe>'
+            # Embed PDF in an iframe
+            b64_pdf = base64.b64encode(resume_data).decode("utf-8")
+            pdf_display = f'<iframe src="data:application/pdf;base64,{b64_pdf}" width="100%" height="700px"></iframe>'
             st.markdown("---")
-            st.markdown("### Resume Preview:")
+            st.subheader("Resume Preview")
             st.markdown(pdf_display, unsafe_allow_html=True)
     else:
-        st.error("Error: 'resume.pdf' not found. Please add the file to the application folder.")
+        st.error("Error: 'resume.pdf' not found in the app folder.")
 
-# --- Projects Page ---
-elif page == "Projects":
-    st.subheader("Featured Projects")
+def show_projects():
+    """Projects Section"""
+    st.title("Projects")
 
-    st.markdown("### Reviewer Dashboard")
-    st.write("Developed a dashboard to summarize the quality and turnaround time of ad reviews, improving internal workflows.")
+    st.subheader("Reviewer Dashboard")
+    st.write("""
+        Developed a dashboard to summarize the quality and turnaround time of advertisement 
+        reviews at Google AdWords, improving internal workflows.
+    """)
 
-    st.markdown("### Learning Insights")
-    st.write("Created an interactive report using Power BI to track student performance and recommend personalized interventions.")
+    st.subheader("Learning Insights")
+    st.write("""
+        Created an interactive report using Power BI to track student performance and 
+        recommend interventions based on analytics.
+    """)
 
-    st.markdown("### AI in Education")
-    st.write("Investigated how AI tools can enhance learner engagement and deliver more personalized digital learning experiences.")
+    st.subheader("AI in Education")
+    st.write("""
+        Investigated how AI tools can enhance learner engagement, providing personalized 
+        digital learning experiences.
+    """)
 
-# --- Contact Page ---
-elif page == "Contact":
-    st.subheader("Contact Information")
-    st.write("Feel free to reach out directly, or use the form below for inquiries.")
+def show_contact():
+    """Contact Section"""
+    st.title("Contact")
+    st.write("Feel free to reach out, or use the form below for inquiries.")
 
     st.markdown("**Email:** akutotasravanthi@gmail.com")
     st.markdown("**Phone:** 940-331-4160")
@@ -109,5 +101,48 @@ elif page == "Contact":
         if submitted:
             st.success(f"Thank you, {name}. Your message has been received.")
 
-# --- Footer ---
-st.markdown('<div class="footer">© 2025 Sravanthi Akutota • Portfolio created using Streamlit</div>', unsafe_allow_html=True)
+# ------------------------------------------------
+# Main Logic: Query Param Navigation + Menu
+# ------------------------------------------------
+
+# 1) Create a dictionary of "pages" -> function
+PAGES = {
+    "Identity": show_identity,
+    "Resume": show_resume,
+    "Projects": show_projects,
+    "Contact": show_contact
+}
+
+# 2) Check if a 'page' query param is set
+query_params = st.experimental_get_query_params()
+default_page = "Identity"
+
+if "page" in query_params:
+    current_page = query_params["page"][0]
+    if current_page not in PAGES.keys():
+        current_page = default_page
+else:
+    current_page = default_page
+
+# 3) Create a selectbox / radio / sidebar for user navigation
+#    but also keep query params in sync
+st.sidebar.title("Navigation")
+
+def set_page(page_name: str):
+    """Helper to update the 'page' query param, then rerun."""
+    st.experimental_set_query_params(page=page_name)
+    st.experimental_rerun()
+
+page_choice = st.sidebar.radio("Go to page:", list(PAGES.keys()), index=list(PAGES.keys()).index(current_page))
+
+if page_choice != current_page:
+    set_page(page_choice)
+
+# 4) Render the chosen page function
+PAGES[current_page]()
+
+# ------------------------------------------------
+# Footer
+# ------------------------------------------------
+st.markdown("<hr>", unsafe_allow_html=True)
+st.write("© 2025 Sravanthi Akutota • Portfolio created using Streamlit")
