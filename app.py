@@ -61,37 +61,25 @@ if page == "Identity":
         </div>
         """, unsafe_allow_html=True)
 
-# --- Resume Page ---
+# --- Resume Page (with .docx) ---
 elif page == "Resume":
     st.subheader("My Resume")
-    st.markdown("Below is a PNG preview, along with a PDF download option.")
+    st.markdown("Below is a download button for my `.docx` resume file.")
 
-    # 1) Display the Resume as an Image (resume.png) at a smaller width
-    png_path = "resume.png"
-    if os.path.exists(png_path):
-        st.image(
-            png_path,
-            caption="Resume (PNG Preview)",
-            width=600  # Fixed smaller width for the image
-        )
-    else:
-        st.error("Error: 'resume.png' not found. Please add the file to this folder.")
+    docx_path = "resume.docx"  # Make sure this file is in the same folder
 
-    st.markdown("---")
-
-    # 2) Download Button for the PDF (resume.pdf)
-    pdf_path = "resume.pdf"
-    if os.path.exists(pdf_path):
-        with open(pdf_path, "rb") as file:
-            pdf_data = file.read()
+    if os.path.exists(docx_path):
+        with open(docx_path, "rb") as file:
+            docx_data = file.read()
         st.download_button(
-            label="Download Resume (PDF)",
-            data=pdf_data,
-            file_name="Sravanthi_Resume.pdf",
-            mime="application/pdf"
+            label="Download Resume (.docx)",
+            data=docx_data,
+            file_name="Sravanthi_Resume.docx",
+            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         )
+        st.info("Open this file in Microsoft Word or a compatible tool to view or edit.")
     else:
-        st.warning("No PDF version available. Please add 'resume.pdf' to this folder if needed.")
+        st.error("Error: 'resume.docx' not found. Please add the file to this folder.")
 
 # --- Projects Page ---
 elif page == "Projects":
