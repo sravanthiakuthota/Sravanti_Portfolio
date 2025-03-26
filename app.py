@@ -61,25 +61,37 @@ if page == "Identity":
         </div>
         """, unsafe_allow_html=True)
 
-# --- Resume Page (with .doc) ---
+# --- Resume Page ---
 elif page == "Resume":
     st.subheader("My Resume")
-    st.markdown("Below is a download button for my `.doc` resume file.")
+    st.markdown("Below is a PNG preview, along with a PDF download option.")
 
-    doc_path = "resume.doc"  # Make sure this file is in the same folder
-
-    if os.path.exists(doc_path):
-        with open(doc_path, "rb") as file:
-            doc_data = file.read()
-        st.download_button(
-            label="Download Resume (.doc)",
-            data=doc_data,
-            file_name="Sravanthi_Resume.doc",
-            mime="application/msword"
+    # 1) Display the Resume as an Image (resume.png) at a smaller width
+    png_path = "resume.png"
+    if os.path.exists(png_path):
+        st.image(
+            png_path,
+            caption="Resume (PNG Preview)",
+            width=600  # Fixed smaller width for the image
         )
-        st.info("Please open this file with Microsoft Word or a compatible tool to view formatting properly.")
     else:
-        st.error("Error: 'resume.doc' not found. Please add the file to this folder.")
+        st.error("Error: 'resume.png' not found. Please add the file to this folder.")
+
+    st.markdown("---")
+
+    # 2) Download Button for the PDF (resume.pdf)
+    pdf_path = "resume.pdf"
+    if os.path.exists(pdf_path):
+        with open(pdf_path, "rb") as file:
+            pdf_data = file.read()
+        st.download_button(
+            label="Download Resume (PDF)",
+            data=pdf_data,
+            file_name="Sravanthi_Resume.pdf",
+            mime="application/pdf"
+        )
+    else:
+        st.warning("No PDF version available. Please add 'resume.pdf' to this folder if needed.")
 
 # --- Projects Page ---
 elif page == "Projects":
