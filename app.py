@@ -61,25 +61,25 @@ if page == "Identity":
         </div>
         """, unsafe_allow_html=True)
 
-# --- Resume Page (with .docx) ---
+# --- Resume Page (with .doc) ---
 elif page == "Resume":
     st.subheader("My Resume")
-    st.markdown("Below is a download button for my `.docx` resume file.")
+    st.markdown("Below is a download button for my `.doc` resume file.")
 
-    docx_path = "resume.docx"  # Make sure this file is in the same folder
+    doc_path = "resume.doc"  # Make sure this file is in the same folder
 
-    if os.path.exists(docx_path):
-        with open(docx_path, "rb") as file:
-            docx_data = file.read()
+    if os.path.exists(doc_path):
+        with open(doc_path, "rb") as file:
+            doc_data = file.read()
         st.download_button(
-            label="Download Resume (.docx)",
-            data=docx_data,
-            file_name="Sravanthi_Resume.docx",
-            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            label="Download Resume (.doc)",
+            data=doc_data,
+            file_name="Sravanthi_Resume.doc",
+            mime="application/msword"
         )
-        st.info("Open this file in Microsoft Word or a compatible tool to view or edit.")
+        st.info("Please open this file with Microsoft Word or a compatible tool to view formatting properly.")
     else:
-        st.error("Error: 'resume.docx' not found. Please add the file to this folder.")
+        st.error("Error: 'resume.doc' not found. Please add the file to this folder.")
 
 # --- Projects Page ---
 elif page == "Projects":
