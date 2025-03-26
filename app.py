@@ -29,13 +29,14 @@ def show_identity():
     with col2:
         st.subheader("About Me")
         st.write("""
-            I am passionate about integrating technology and education to create impactful 
-            learning experiences. I am currently pursuing my master's degree in Learning 
-            Technologies, with a background in Electrical and Electronics Engineering.
+            I am passionate about integrating technology and education 
+            to create impactful learning experiences. I am currently 
+            pursuing my master's degree in Learning Technologies, with 
+            a background in Electrical and Electronics Engineering.
 
-            I also have experience in content management and data analysis from my time at 
-            Google AdWords. Please use the menu to learn more about my resume, projects, 
-            and how to get in touch.
+            I also have experience in content management and data analysis 
+            from my time at Google AdWords. Please use the menu to learn more 
+            about my resume, projects, and how to get in touch.
         """)
 
 def show_resume():
@@ -47,6 +48,7 @@ def show_resume():
     if os.path.exists(resume_path):
         with open(resume_path, "rb") as f:
             resume_data = f.read()
+
             # Download button
             st.download_button(
                 label="Download Resume",
@@ -70,20 +72,21 @@ def show_projects():
 
     st.subheader("Reviewer Dashboard")
     st.write("""
-        Developed a dashboard to summarize the quality and turnaround time of advertisement 
-        reviews at Google AdWords, improving internal workflows.
+        Developed a dashboard to summarize the quality and 
+        turnaround time of advertisement reviews at Google AdWords, 
+        improving internal workflows.
     """)
 
     st.subheader("Learning Insights")
     st.write("""
-        Created an interactive report using Power BI to track student performance and 
-        recommend interventions based on analytics.
+        Created an interactive report using Power BI to track 
+        student performance and recommend interventions based on analytics.
     """)
 
     st.subheader("AI in Education")
     st.write("""
-        Investigated how AI tools can enhance learner engagement, providing personalized 
-        digital learning experiences.
+        Investigated how AI tools can enhance learner engagement 
+        and deliver more personalized digital learning experiences.
     """)
 
 def show_contact():
@@ -105,7 +108,7 @@ def show_contact():
 # Main Logic: Query Param Navigation + Menu
 # ------------------------------------------------
 
-# 1) Create a dictionary of "pages" -> function
+# Define pages
 PAGES = {
     "Identity": show_identity,
     "Resume": show_resume,
@@ -113,32 +116,32 @@ PAGES = {
     "Contact": show_contact
 }
 
-# 2) Check if a 'page' query param is set
-query_params = st.experimental_get_query_params()
+# Get current query params
+query_params = st.query_params
 default_page = "Identity"
 
-if "page" in query_params:
-    current_page = query_params["page"][0]
-    if current_page not in PAGES.keys():
-        current_page = default_page
+# If 'page' param not set or invalid, go to default
+if "page" in query_params and query_params["page"] in PAGES:
+    current_page = query_params["page"]
 else:
     current_page = default_page
 
-# 3) Create a selectbox / radio / sidebar for user navigation
-#    but also keep query params in sync
 st.sidebar.title("Navigation")
 
 def set_page(page_name: str):
-    """Helper to update the 'page' query param, then rerun."""
-    st.experimental_set_query_params(page=page_name)
+    """Update the 'page' query param, then rerun."""
+    st.set_query_params(page=page_name)
     st.experimental_rerun()
 
-page_choice = st.sidebar.radio("Go to page:", list(PAGES.keys()), index=list(PAGES.keys()).index(current_page))
+page_choice = st.sidebar.radio(
+    "Go to page:",
+    list(PAGES.keys()),
+    index=list(PAGES.keys()).index(current_page)
+)
 
 if page_choice != current_page:
     set_page(page_choice)
 
-# 4) Render the chosen page function
 PAGES[current_page]()
 
 # ------------------------------------------------
