@@ -47,10 +47,10 @@ if page == "Identity":
 
     col1, col2 = st.columns([1, 3])
     with col1:
-        if os.path.exists("profile.jpg"):
-            st.image("profile.jpg", width=200, caption="Sravanthi Akutota")
+        if os.path.exists("profile.jpeg"):
+            st.image("profile.jpeg", width=200, caption="Sravanthi Akutota")
         else:
-            st.warning("'profile.jpg' not found. Please add a professional headshot.")
+            st.warning("'profile.jpeg' not found. Please add a professional headshot.")
     with col2:
         st.markdown("""
         <div class="section">
