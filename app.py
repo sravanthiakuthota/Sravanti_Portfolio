@@ -66,13 +66,13 @@ elif page == "Resume":
     st.subheader("My Resume")
     st.markdown("Below is a PNG preview, along with a PDF download option.")
 
-    # 1) Display the Resume as an Image (resume.png)
+    # 1) Display the Resume as an Image (resume.png) at a smaller width
     png_path = "resume.png"
     if os.path.exists(png_path):
         st.image(
             png_path,
             caption="Resume (PNG Preview)",
-            use_container_width=True  # Updated parameter
+            width=600  # Fixed smaller width for the image
         )
     else:
         st.error("Error: 'resume.png' not found. Please add the file to this folder.")
