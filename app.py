@@ -69,7 +69,11 @@ elif page == "Resume":
     # 1) Display the Resume as an Image (resume.png)
     png_path = "resume.png"
     if os.path.exists(png_path):
-        st.image(png_path, caption="Resume (PNG Preview)", use_column_width=True)
+        st.image(
+            png_path,
+            caption="Resume (PNG Preview)",
+            use_container_width=True  # Updated parameter
+        )
     else:
         st.error("Error: 'resume.png' not found. Please add the file to this folder.")
 
