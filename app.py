@@ -11,16 +11,17 @@ st.set_page_config(
 )
 
 # ------------------------------------------------
-# Helper Functions (Your "Pages")
+# Helper functions (Your "pages")
 # ------------------------------------------------
 
 def show_identity():
-    """Identity (Home) Section"""
+    """Identity (Home) Section."""
     st.title("Sravanthi Akutota")
     st.write("M.S. in Learning Technologies | University of North Texas")
 
     col1, col2 = st.columns([1, 2])
     with col1:
+        # Check for your profile image
         if os.path.exists("profile.jpeg"):
             st.image("profile.jpeg", width=200, caption="Sravanthi Akutota")
         else:
@@ -40,7 +41,7 @@ def show_identity():
         """)
 
 def show_resume():
-    """Resume Section (PDF Viewer and Download)"""
+    """Resume Section (PDF Viewer and Download)."""
     st.title("Resume")
     st.write("Below is my resume, with an option to download.")
 
@@ -59,7 +60,10 @@ def show_resume():
 
             # Embed PDF in an iframe
             b64_pdf = base64.b64encode(resume_data).decode("utf-8")
-            pdf_display = f'<iframe src="data:application/pdf;base64,{b64_pdf}" width="100%" height="700px"></iframe>'
+            pdf_display = (
+                f'<iframe src="data:application/pdf;base64,{b64_pdf}" '
+                f'width="100%" height="700px"></iframe>'
+            )
             st.markdown("---")
             st.subheader("Resume Preview")
             st.markdown(pdf_display, unsafe_allow_html=True)
@@ -67,7 +71,7 @@ def show_resume():
         st.error("Error: 'resume.pdf' not found in the app folder.")
 
 def show_projects():
-    """Projects Section"""
+    """Projects Section."""
     st.title("Projects")
 
     st.subheader("Reviewer Dashboard")
@@ -90,7 +94,7 @@ def show_projects():
     """)
 
 def show_contact():
-    """Contact Section"""
+    """Contact Section."""
     st.title("Contact")
     st.write("Feel free to reach out, or use the form below for inquiries.")
 
@@ -105,10 +109,10 @@ def show_contact():
             st.success(f"Thank you, {name}. Your message has been received.")
 
 # ------------------------------------------------
-# Main Logic: Query Param Navigation + Menu
+# Main Logic: Using experimental_* Query Params
 # ------------------------------------------------
 
-# Define pages
+# Pages
 PAGES = {
     "Identity": show_identity,
     "Resume": show_resume,
@@ -116,21 +120,19 @@ PAGES = {
     "Contact": show_contact
 }
 
-# Get current query params
-query_params = st.query_params
+query_params = st.experimental_get_query_params()
 default_page = "Identity"
 
-# If 'page' param not set or invalid, go to default
-if "page" in query_params and query_params["page"] in PAGES:
-    current_page = query_params["page"]
+if "page" in query_params and query_params["page"][0] in PAGES:
+    current_page = query_params["page"][0]
 else:
     current_page = default_page
 
 st.sidebar.title("Navigation")
 
 def set_page(page_name: str):
-    """Update the 'page' query param, then rerun."""
-    st.set_query_params(page=page_name)
+    """Update the 'page' query param, then rerun using experimental methods."""
+    st.experimental_set_query_params(page=page_name)
     st.experimental_rerun()
 
 page_choice = st.sidebar.radio(
@@ -142,10 +144,9 @@ page_choice = st.sidebar.radio(
 if page_choice != current_page:
     set_page(page_choice)
 
-PAGES[current_page]()
+# Render the chosen page
+PAGES[page_choice]()
 
-# ------------------------------------------------
 # Footer
-# ------------------------------------------------
 st.markdown("<hr>", unsafe_allow_html=True)
 st.write("© 2025 Sravanthi Akutota • Portfolio created using Streamlit")
