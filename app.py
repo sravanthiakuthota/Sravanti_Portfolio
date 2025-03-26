@@ -1,19 +1,11 @@
 import streamlit as st
-import base64
 import os
 
-# Page Configuration
-st.set_page_config(
-    page_title="Sravanthi Akutota | Portfolio",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="Sravanthi Akutota | Portfolio", layout="wide")
 
-# --- Sidebar Navigation ---
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["Identity", "Resume", "Projects", "Contact"])
 
-# --- Custom Styling ---
 st.markdown("""
     <style>
         .title {
@@ -40,15 +32,12 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-
-# --- Identity Page ---
 if page == "Identity":
     st.markdown('<div class="title">Sravanthi Akutota</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle">M.S. in Learning Technologies | University of North Texas</div>', unsafe_allow_html=True)
 
     col1, col2 = st.columns([1, 3])
     with col1:
-        # Updated to "profile.jpeg"
         if os.path.exists("profile.jpeg"):
             st.image("profile.jpeg", width=200, caption="Sravanthi Akutota")
         else:
@@ -63,37 +52,23 @@ if page == "Identity":
         </div>
         """, unsafe_allow_html=True)
 
-
-# --- Resume Page ---
 elif page == "Resume":
     st.subheader("My Resume")
-    st.markdown("Below is a direct download link to my resume. Some browsers may block embedded PDFs, so this method is more reliable.")
+    st.markdown("Use the download button below to save a copy of my resume.")
 
     resume_path = "resume.pdf"
     if os.path.exists(resume_path):
         with open(resume_path, "rb") as file:
             resume_data = file.read()
-
-        # Download button for resume
-        st.download_button(
-            label="Download Resume (PDF)",
-            data=resume_data,
-            file_name="Sravanthi_Resume.pdf",
-            mime="application/pdf"
-        )
-
-        st.markdown("---")
-
-        # Optional: Provide a link to open in new browser tab (may work on some browsers)
-        b64_pdf = base64.b64encode(resume_data).decode("utf-8")
-        pdf_link = f'<a href="data:application/pdf;base64,{b64_pdf}" target="_blank">Open Resume in New Tab</a>'
-        st.markdown(pdf_link, unsafe_allow_html=True)
-
+            st.download_button(
+                label="Download Resume (PDF)",
+                data=resume_data,
+                file_name="Sravanthi_Resume.pdf",
+                mime="application/pdf"
+            )
     else:
         st.error("Error: 'resume.pdf' not found. Please add the file to the application folder.")
 
-
-# --- Projects Page ---
 elif page == "Projects":
     st.subheader("Featured Projects")
 
@@ -106,11 +81,9 @@ elif page == "Projects":
     st.markdown("### AI in Education")
     st.write("Investigated how AI tools can enhance learner engagement and deliver more personalized digital learning experiences.")
 
-
-# --- Contact Page ---
 elif page == "Contact":
     st.subheader("Contact Information")
-    st.write("Feel free to reach out directly or use the form below for inquiries.")
+    st.write("Feel free to reach out directly, or use the form below for inquiries.")
 
     st.markdown("**Email:** akutotasravanthi@gmail.com")
     st.markdown("**Phone:** 940-331-4160")
@@ -122,6 +95,4 @@ elif page == "Contact":
         if submitted:
             st.success(f"Thank you, {name}. Your message has been received.")
 
-
-# --- Footer ---
 st.markdown('<div class="footer">© 2025 Sravanthi Akutota • Portfolio created using Streamlit</div>', unsafe_allow_html=True)
