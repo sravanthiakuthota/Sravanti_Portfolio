@@ -2,18 +2,14 @@ import streamlit as st
 import base64
 import os
 
-# Page config
-st.set_page_config(
-    page_title="Sravanthi Akutota | Portfolio",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# Set up the page
+st.set_page_config(page_title="Sravanthi Akutota | Portfolio", layout="wide")
 
 # Sidebar Navigation
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["Identity", "Resume", "Projects", "Contact"])
 
-# Custom Styling
+# Custom CSS (optional)
 st.markdown("""
     <style>
         .title {
@@ -47,32 +43,32 @@ if page == "Identity":
 
     col1, col2 = st.columns([1, 3])
     with col1:
-        # Use profile.jpeg if you have it
+        # Show a local headshot if available
         if os.path.exists("profile.jpeg"):
             st.image("profile.jpeg", width=200, caption="Sravanthi Akutota")
         else:
-            st.warning("'profile.jpeg' not found. Please add a professional headshot.")
+            st.warning("profile.jpeg not found. Please add a professional headshot.")
     with col2:
         st.markdown("""
         <div class="section">
-        I am passionate about integrating technology and education to create impactful learning experiences.
-        I am currently pursuing my master’s degree in Learning Technologies, with a background in Electrical
-        and Electronics Engineering. In my previous role at Google AdWords, I gained valuable experience in
-        content management and data analysis.
+        I am passionate about integrating technology and education to create impactful learning experiences. 
+        I am currently pursuing my master’s degree in Learning Technologies, with a background in Electrical 
+        and Electronics Engineering. My previous role at Google AdWords provided me with valuable experience 
+        in content management and data analysis.
         </div>
         """, unsafe_allow_html=True)
 
 # Resume Page
 elif page == "Resume":
     st.subheader("My Resume")
-    st.markdown("Please find my resume embedded below. You can also download a copy.")
+    st.markdown("View my resume below. If it's blocked or blank, please use the download option.")
 
-    resume_path = "resume.pdf"
+    resume_path = "resume.pdf"  # Make sure this file exists in the same folder
     if os.path.exists(resume_path):
-        with open(resume_path, "rb") as f:
-            resume_data = f.read()
+        with open(resume_path, "rb") as file:
+            resume_data = file.read()
 
-        # Download button for your resume
+        # Download button
         st.download_button(
             label="Download Resume (PDF)",
             data=resume_data,
@@ -80,25 +76,24 @@ elif page == "Resume":
             mime="application/pdf"
         )
 
-        st.markdown("---")
-        st.markdown("### Resume Preview:")
-
-        # Embed PDF in HTML
-        base64_pdf = base64.b64encode(resume_data).decode("utf-8")
+        # Embed PDF with base64
+        b64_pdf = base64.b64encode(resume_data).decode("utf-8")
         pdf_display = f"""
         <iframe
-            src="data:application/pdf;base64,{base64_pdf}"
+            src="data:application/pdf;base64,{b64_pdf}"
             width="100%"
             height="800"
             type="application/pdf"
         >
         </iframe>
         """
+        st.markdown("---")
+        st.markdown("### Resume Preview (Embedded)")
         st.markdown(pdf_display, unsafe_allow_html=True)
 
-        st.info("If your browser blocks the embedded PDF, please use the download link above.")
+        st.info("Note: If this area is blank, your browser may have blocked the embedded PDF. Try using the download button above.")
     else:
-        st.error("Error: 'resume.pdf' not found. Please add the file to this app folder.")
+        st.error("Error: 'resume.pdf' not found. Please add the file to the application folder.")
 
 # Projects Page
 elif page == "Projects":
@@ -111,7 +106,7 @@ elif page == "Projects":
     st.write("Created an interactive report using Power BI to track student performance and recommend personalized interventions.")
 
     st.markdown("### AI in Education")
-    st.write("Investigated how AI tools can enhance learner engagement and deliver more personalized digital learning experiences.")
+    st.write("Investigated how AI tools can enhance learner engagement and deliver personalized digital learning experiences.")
 
 # Contact Page
 elif page == "Contact":
