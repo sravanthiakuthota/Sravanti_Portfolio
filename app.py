@@ -187,7 +187,7 @@ if page == "Scholarly Writing":
     """)
 
     st.markdown("""
-    ### Holistic Reflection (~500 Words)
+    ### Holistic Reflection
     Over the course of my Learning Technologies master’s program, my approach to scholarly writing has 
     evolved significantly, moving from purely theoretical analyses to research-informed instructional 
     applications. In LTEC 5300, I began by examining fundamental educational theories, particularly social 
