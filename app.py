@@ -149,8 +149,7 @@ if page == "Scholarly Writing":
 
     st.markdown("""
     ### Example 1: Research Paper (LTEC 5300)
-    **Title:** Exploring Social Constructivism in Online Collaborative Environments  
-    **Link to Full Paper:** [Insert Shared URL or File Here]  
+    **Title:** Exploring Social Constructivism in Online Collaborative Environments
 
     **Purpose:**  
     This paper critically examines Vygotsky’s social constructivist theory and its implications for 
@@ -169,7 +168,6 @@ if page == "Scholarly Writing":
     st.markdown("""
     ### Example 2: 1500-Word Paper (LTEC 5610)
     **Title:** Applying Cognitive Load Theory to Multimedia Instructional Design  
-    **Link to Full Paper:** [Insert Shared URL or File Here]  
 
     **Purpose:**  
     This 1500-word paper investigates how Cognitive Load Theory (CLT) principles can optimize multimedia 
@@ -232,14 +230,6 @@ if page == "Scholarly Writing":
       Harvard University Press.
 
     - Mayer, R. E. (2014). *Cognitive theory of multimedia learning.* Cambridge University Press.
-
-    ### Portfolio Placement
-    - Include direct links to each paper (Google Drive, OneDrive, or attached PDFs).
-    - Paste the Holistic Reflection text on this page.
-    - Confirm that all formatting meets APA style requirements.
-
-    By meeting these guidelines, your scholarly writing showcases your mastery of academic inquiry, 
-    theoretical application, and reflective practice.
     """)
 
 # ---------------------------
