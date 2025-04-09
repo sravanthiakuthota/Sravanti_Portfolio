@@ -184,7 +184,7 @@ Hiring Manager
 
 Dear Hiring Manager,
 
-I am writing to express my enthusiasm for the **[Instructional Technology / Learning Experience Designer]** position at **[Company Name]**. As a graduate student completing a Master of Science in Learning Technologies at the University of North Texas (May 2025) and a former Associate Reviewer with Google AdWords, I bring a unique blend of instructional design expertise, data‑driven content management, and collaborative leadership.
+I am writing to express my enthusiasm for the **[Instructional Technology / Learning Experience Designer]** position. As a graduate student completing a Master of Science in Learning Technologies at the University of North Texas (May 2025) and a former Associate Reviewer with Google AdWords, I bring a unique blend of instructional design expertise, data‑driven content management, and collaborative leadership.
 
 At Google AdWords, I evaluated large‑scale web content for quality and compliance, led trend analyses, and produced weekly process reports that improved turnaround efficiency by 15 percent. My ability to translate complex data into actionable insights directly aligns with your organization’s goal of creating evidence‑based learning solutions. In addition, my background in IT Network Analysis and Core Java enables me to communicate effectively with technical teams while maintaining a learner‑centered perspective.
 
@@ -192,7 +192,7 @@ In my graduate studies, I have focused on applying Cognitive Load Theory and soc
 
 My professional goals are to (1) design data‑driven instructional solutions that improve learner performance, (2) foster cross‑functional collaboration to ensure scalable content quality, and (3) champion continuous improvement through analytics and user feedback. Your organization’s emphasis on innovative learning technologies resonates strongly with these goals.
 
-Please review my attached résumé and online portfolio for additional details and sample work. I welcome the opportunity to discuss how my background in content analysis, instructional design, and project management can contribute to **[Company Name]**. Thank you for your time and consideration.
+Please review my attached résumé and online portfolio for additional details and sample work. I welcome the opportunity to discuss how my background in content analysis, instructional design, and project management can contribute to **[organisation]**. Thank you for your time and consideration.
 
 Sincerely,
 
