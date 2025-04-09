@@ -61,9 +61,9 @@ st.markdown(
 )
 
 
-# ──────────────────────────────────────────────────────────
-# Identity Page
-# ──────────────────────────────────────────────────────────
+# ---------------------------
+#          Identity
+# ---------------------------
 if page == "Identity":
     st.markdown('<div class="title">Sravanthi Akutota</div>', unsafe_allow_html=True)
     st.markdown(
@@ -72,24 +72,27 @@ if page == "Identity":
     )
 
     col1, col2 = st.columns([1, 3])
+
     with col1:
         if os.path.exists("profile.jpeg"):
             st.image("profile.jpeg", width=200, caption="Sravanthi Akutota")
         else:
             st.warning("profile.jpeg not found. Please add a professional headshot.")
+
     with col2:
-    st.markdown(
-        """
-        <div class="section" style="color:#0d1b2a;">   <!-- text color changed -->
-        I am passionate about integrating technology and education to create impactful learning
-        experiences. Currently, I am completing my master’s degree in Learning Technologies, building on
-        a B.Tech in Electrical & Electronics Engineering. My professional background at Google AdWords
-        refined my skills in content quality analysis, data‑driven decision‑making, and collaborative
-        leadership.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        st.markdown(
+            """
+            <div class="section" style="color:#0d1b2a;">
+            I am passionate about integrating technology and education to create impactful learning
+            experiences. Currently, I am completing my master’s degree in Learning Technologies, building on
+            a B.Tech in Electrical & Electronics Engineering. My professional background at Google AdWords
+            refined my skills in content quality analysis, data‑driven decision‑making, and collaborative
+            leadership.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
 
 
 # ──────────────────────────────────────────────────────────
