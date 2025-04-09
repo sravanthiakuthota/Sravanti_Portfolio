@@ -20,19 +20,18 @@ page = st.sidebar.radio(
     ["Identity", "Resume", "Projects", "Contact", "Scholarly Writing", "Cover Letter"]
 )
 
-# ──────────────────────────────────────────────────────────
-# Custom CSS
-# ──────────────────────────────────────────────────────────
+# Custom CSS  ▸  replace the previous <style> block
 st.markdown(
     """
     <style>
-        .title   { font-size: 2.5rem; font-weight: 700; color:#2E86C1; }
-        .subtitle{ font-size: 1.2rem; color:#566573; margin-bottom:20px; }
-        .section { background:#FBFCFC; padding:20px; border-radius:12px; }
-        .footer  { text-align:center; font-size:0.8rem; color:gray; margin-top:4rem; }
+        body      { background-color:#e6f2ff; }   /* light‑blue page background */
+        .title    { font-size:2.5rem; font-weight:700; color:#2E86C1; }
+        .subtitle { font-size:1.2rem;  color:#566573; margin-bottom:20px; }
+        .section  { background:#FBFCFC; padding:20px; border-radius:12px; }
+        .footer   { text-align:center; font-size:0.8rem; color:gray; margin-top:4rem; }
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 # ──────────────────────────────────────────────────────────
