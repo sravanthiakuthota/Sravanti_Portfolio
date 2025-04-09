@@ -1,67 +1,117 @@
 import streamlit as st
 import os
+from datetime import date
 
-# Page Configuration
+# ---------------------------
+#   Page Configuration
+# ---------------------------
 st.set_page_config(
     page_title="Sravanthi Akutota | Portfolio",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Sidebar Navigation
+# ---------------------------
+#   Sidebar Navigation
+# ---------------------------
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Identity", "Resume", "Projects", "Contact", "Scholarly Writing"])
+page = st.sidebar.radio(
+    "Go to",
+    [
+        "Identity",
+        "Cover Letter",
+        "Resume",
+        "Projects",
+        "Contact",
+        "Scholarly Writing"
+    ]
+)
 
-# Custom CSS (optional styling)
-st.markdown("""
+# ---------------------------
+#   Global CSS
+# ---------------------------
+st.markdown(
+    """
     <style>
-        .title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #2E86C1;
-        }
-        .subtitle {
-            font-size: 1.2rem;
-            color: #566573;
-            margin-bottom: 20px;
-        }
-        .section {
-            background-color: #FBFCFC;
-            padding: 20px;
-            border-radius: 12px;
-        }
-        .footer {
-            text-align: center;
-            font-size: 0.8rem;
-            color: gray;
-            margin-top: 4rem;
-        }
+        .title   {font-size:2.5rem;font-weight:bold;color:#2E86C1;}
+        .subtitle{font-size:1.2rem;color:#566573;margin-bottom:20px;}
+        .section {background-color:#FBFCFC;padding:20px;border-radius:12px;}
+        .footer  {text-align:center;font-size:0.8rem;color:gray;margin-top:4rem;}
     </style>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
 # ---------------------------
 #          Identity
 # ---------------------------
 if page == "Identity":
     st.markdown('<div class="title">Sravanthi Akutota</div>', unsafe_allow_html=True)
-    st.markdown('<div class="subtitle">M.S. in Learning Technologies | University of North Texas</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="subtitle">M.S. in Learning Technologies | University of North Texas</div>',
+        unsafe_allow_html=True,
+    )
 
     col1, col2 = st.columns([1, 3])
     with col1:
-        # Display headshot if found
         if os.path.exists("profile.jpeg"):
             st.image("profile.jpeg", width=200, caption="Sravanthi Akutota")
         else:
             st.warning("'profile.jpeg' not found. Please add a professional headshot.")
     with col2:
-        st.markdown("""
-        <div class="section">
-        I am passionate about integrating technology and education to create impactful learning experiences.
-        I am currently pursuing my master’s degree in Learning Technologies, with a background in Electrical
-        and Electronics Engineering. In my previous role at Google AdWords, I gained valuable experience in 
-        content management and data analysis.
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="section">
+            I am passionate about integrating technology and education to create impactful learning experiences.
+            Currently completing my master’s degree in Learning Technologies, I leverage my background in Electrical
+            and Electronics Engineering and prior experience at Google AdWords to design data‑driven, learner‑centered solutions.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+# ---------------------------
+#         Cover Letter
+# ---------------------------
+if page == "Cover Letter":
+    st.subheader("Cover Letter")
+
+    today = date.today().strftime("%B %d, %Y")
+
+    cover_letter = f"""
+**{today}**
+
+Hiring Manager  
+[Company Name]  
+[Company Address]  
+
+Dear Hiring Manager,
+
+I am writing to express my interest in the **Learning Technologies / Instructional Design** role at your organization.  
+As a graduate student in the Master of Science in Learning Technologies program at the University of North Texas—graduating May 2025—I have developed a solid foundation in instructional theory, multimedia design, and data‑driven evaluation. My enclosed portfolio highlights projects that integrate ADDIE and SAM methodologies with emerging technologies to deliver engaging learning solutions.
+
+During my tenure as an **Associate Reviewer at Google AdWords** (May 2021 – June 2023), I honed my ability to analyze complex data sets, evaluate content quality, and collaborate with cross‑functional teams. These responsibilities sharpened my attention to detail and reinforced the importance of iterative feedback—skills directly transferable to designing and refining e‑learning experiences. In addition, my technical proficiency with Adobe Creative Cloud, Core Java, and IT network analysis enables me to create media‑rich assets while ensuring robust system performance.
+
+Academically, courses such as *Learning & Cognition*, *Web Development*, and *Project Management* have expanded my expertise in both pedagogy and technology. I am particularly proud of a recent multimedia module (featured in my portfolio) that applies Cognitive Load Theory to streamline information processing for diverse learners.
+
+**Professional Goals**  
+My immediate goal is to join a forward‑thinking organization where I can:  
+
+* design evidence‑based digital learning products that improve learner outcomes,  
+* leverage analytics to iterate and personalize instruction, and  
+* contribute to a culture of continuous improvement through collaboration and research.  
+
+Long‑term, I aspire to lead instructional design teams that pioneer innovative, accessible learning ecosystems on a global scale.
+
+Thank you for considering my application. I would welcome the opportunity to discuss how my background in content management, data analysis, and instructional design aligns with your organization’s objectives. I can be reached at **940‑331‑4160** or **akutotasravanthi@gmail.com**.  
+
+Sincerely,
+
+**Sravanthi Akutota**  
+Denton, TX 76201  
+[LinkedIn Profile]  
+"""
+    st.markdown(cover_letter)
 
 # ---------------------------
 #          Resume
@@ -70,30 +120,21 @@ if page == "Resume":
     st.subheader("My Resume")
     st.markdown("Below is a PNG preview, along with a PDF download option.")
 
-    # (1) Display the Resume as an Image (resume.png) at a smaller width
-    png_path = "resume.png"
-    if os.path.exists(png_path):
-        st.image(
-            png_path,
-            caption="Resume (PNG Preview)",
-            width=600  # Fixed smaller width for the image
-        )
+    if os.path.exists("resume.png"):
+        st.image("resume.png", caption="Resume (PNG Preview)", width=600)
     else:
         st.error("Error: 'resume.png' not found. Please add the file to this folder.")
 
     st.markdown("---")
 
-    # (2) Download Button for the PDF (resume.pdf)
-    pdf_path = "resume.pdf"
-    if os.path.exists(pdf_path):
-        with open(pdf_path, "rb") as file:
-            pdf_data = file.read()
-        st.download_button(
-            label="Download Resume (PDF)",
-            data=pdf_data,
-            file_name="Sravanthi_Resume.pdf",
-            mime="application/pdf"
-        )
+    if os.path.exists("resume.pdf"):
+        with open("resume.pdf", "rb") as file:
+            st.download_button(
+                label="Download Resume (PDF)",
+                data=file.read(),
+                file_name="Sravanthi_Resume.pdf",
+                mime="application/pdf",
+            )
     else:
         st.warning("No PDF version available. Please add 'resume.pdf' to this folder if needed.")
 
@@ -104,13 +145,19 @@ if page == "Projects":
     st.subheader("Featured Projects")
 
     st.markdown("### Reviewer Dashboard")
-    st.write("Developed a dashboard to summarize the quality and turnaround time of ad reviews, improving internal workflows.")
+    st.write(
+        "Developed a dashboard to summarize ad‑review quality and turnaround time, improving internal workflows."
+    )
 
     st.markdown("### Learning Insights")
-    st.write("Created an interactive report using Power BI to track student performance and recommend personalized interventions.")
+    st.write(
+        "Created an interactive Power BI report to track student performance and recommend personalized interventions."
+    )
 
     st.markdown("### AI in Education")
-    st.write("Investigated how AI tools can enhance learner engagement and deliver personalized digital learning experiences.")
+    st.write(
+        "Investigated how AI tools can enhance learner engagement and deliver personalized digital learning experiences."
+    )
 
 # ---------------------------
 #          Contact
@@ -120,7 +167,7 @@ if page == "Contact":
     st.write("Feel free to reach out directly, or use the form below for inquiries.")
 
     st.markdown("**Email:** akutotasravanthi@gmail.com")
-    st.markdown("**Phone:** 940-331-4160")
+    st.markdown("**Phone:** 940‑331‑4160")
 
     with st.form("contact_form"):
         name = st.text_input("Your Name")
