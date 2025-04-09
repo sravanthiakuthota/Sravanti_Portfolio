@@ -181,8 +181,6 @@ Denton, TX 76201
 akutotasravanthi@gmail.com  
 
 Hiring Manager  
-[Company Name]  
-[Company Address]  
 
 Dear Hiring Manager,
 
