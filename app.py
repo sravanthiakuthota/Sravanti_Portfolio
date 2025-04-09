@@ -2,54 +2,47 @@ import streamlit as st
 import os
 from datetime import date
 
-# ─────────────────────────────────────────────
-# Page‑level settings
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
+# Page Configuration
+# ──────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Sravanthi Akutota | Portfolio",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ─────────────────────────────────────────────
-# Sidebar navigation
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
+# Sidebar Navigation
+# ──────────────────────────────────────────────────────────
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to",
-    [
-        "Identity",
-        "Cover Letter",
-        "Resume",
-        "Projects",
-        "Contact",
-        "Scholarly Writing"
-    ]
+    ["Identity", "Resume", "Projects", "Contact", "Scholarly Writing", "Cover Letter"]
 )
 
-# ─────────────────────────────────────────────
-# Global CSS
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
+# Custom CSS
+# ──────────────────────────────────────────────────────────
 st.markdown(
     """
     <style>
-        .title   {font-size:2.5rem;font-weight:bold;color:#2E86C1;}
-        .subtitle{font-size:1.2rem;color:#566573;margin-bottom:20px;}
-        .section {background-color:#FBFCFC;padding:20px;border-radius:12px;}
-        .footer  {text-align:center;font-size:0.8rem;color:gray;margin-top:4rem;}
+        .title   { font-size: 2.5rem; font-weight: 700; color:#2E86C1; }
+        .subtitle{ font-size: 1.2rem; color:#566573; margin-bottom:20px; }
+        .section { background:#FBFCFC; padding:20px; border-radius:12px; }
+        .footer  { text-align:center; font-size:0.8rem; color:gray; margin-top:4rem; }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
 # Identity Page
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
 if page == "Identity":
     st.markdown('<div class="title">Sravanthi Akutota</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="subtitle">M.S. in Learning Technologies | University of North Texas</div>',
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
     col1, col2 = st.columns([1, 3])
@@ -57,62 +50,24 @@ if page == "Identity":
         if os.path.exists("profile.jpeg"):
             st.image("profile.jpeg", width=200, caption="Sravanthi Akutota")
         else:
-            st.warning("'profile.jpeg' not found. Please add a professional headshot.")
+            st.warning("profile.jpeg not found. Please add a professional headshot.")
     with col2:
         st.markdown(
             """
             <div class="section">
-            I am passionate about integrating technology and education to create impactful learning experiences.
-            Currently completing my master’s degree in Learning Technologies, I leverage my background in Electrical
-            and Electronics Engineering and prior experience at Google AdWords to design data‑driven, learner‑centered solutions.
+            I am passionate about integrating technology and education to create impactful learning
+            experiences. Currently, I am completing my master’s degree in Learning Technologies, building on
+            a B.Tech in Electrical & Electronics Engineering. My professional background at Google AdWords
+            refined my skills in content quality analysis, data‑driven decision‑making, and collaborative
+            leadership.
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
-# ─────────────────────────────────────────────
-# Cover‑Letter Page
-# ─────────────────────────────────────────────
-if page == "Cover Letter":
-    st.subheader("Cover Letter")
-
-    today = date.today().strftime("%B %d, %Y")
-    cover_letter = f"""
-**{today}**
-
-Hiring Manager  
-[Company Name]  
-[Company Address]  
-
-Dear Hiring Manager,
-
-I am writing to express my interest in the **Learning Technologies / Instructional Design** role at your organization.  
-As a graduate student in the Master of Science in Learning Technologies program at the University of North Texas—graduating **May 2025**—I have developed a solid foundation in instructional theory, multimedia design, and data‑driven evaluation. My enclosed portfolio highlights projects that integrate ADDIE and SAM methodologies with emerging technologies to deliver engaging learning solutions.
-
-During my tenure as an **Associate Reviewer at Google AdWords** (May 2021 – June 2023), I honed my ability to analyze complex data sets, evaluate content quality, and collaborate with cross‑functional teams. These responsibilities sharpened my attention to detail and reinforced the importance of iterative feedback—skills directly transferable to designing and refining e‑learning experiences. In addition, my technical proficiency with Adobe Creative Cloud, Core Java, and IT network analysis enables me to create media‑rich assets while ensuring robust system performance.
-
-Academically, courses such as *Learning & Cognition*, *Web Development*, and *Project Management* have expanded my expertise in both pedagogy and technology. I am particularly proud of a recent multimedia module (featured in my portfolio) that applies Cognitive Load Theory to streamline information processing for diverse learners.
-
-**Professional Goals**  
-• Design evidence‑based digital learning products that improve learner outcomes  
-• Leverage analytics to iterate and personalize instruction  
-• Contribute to a culture of continuous improvement through collaboration and research  
-
-Long‑term, I aspire to lead instructional design teams that pioneer innovative, accessible learning ecosystems on a global scale.
-
-Thank you for considering my application. I would welcome the opportunity to discuss how my background in content management, data analysis, and instructional design aligns with your organization’s objectives. I can be reached at **940‑331‑4160** or **akutotasravanthi@gmail.com**.
-
-Sincerely,  
-
-**Sravanthi Akutota**  
-Denton, TX 76201  
-[LinkedIn Profile]
-"""
-    st.markdown(cover_letter)
-
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
 # Resume Page
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
 if page == "Resume":
     st.subheader("My Resume")
     st.markdown("Below is a PNG preview, along with a PDF download option.")
@@ -120,45 +75,45 @@ if page == "Resume":
     if os.path.exists("resume.png"):
         st.image("resume.png", caption="Resume (PNG Preview)", width=600)
     else:
-        st.error("Error: 'resume.png' not found. Please add the file to this folder.")
+        st.error("resume.png not found. Please add the file to this folder.")
 
     st.markdown("---")
 
     if os.path.exists("resume.pdf"):
-        with open("resume.pdf", "rb") as file:
+        with open("resume.pdf", "rb") as f:
             st.download_button(
-                label="Download Resume (PDF)",
-                data=file.read(),
+                "Download Resume (PDF)",
+                f.read(),
                 file_name="Sravanthi_Resume.pdf",
-                mime="application/pdf"
+                mime="application/pdf",
             )
     else:
-        st.warning("No PDF version available. Please add 'resume.pdf' to this folder if needed.")
+        st.warning("No resume.pdf found. Add it to enable download.")
 
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
 # Projects Page
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
 if page == "Projects":
     st.subheader("Featured Projects")
 
     st.markdown("### Reviewer Dashboard")
     st.write(
-        "Developed a dashboard to summarize ad‑review quality and turnaround time, improving internal workflows."
+        "Designed a dashboard that summarizes ad‑review quality and turnaround time, improving internal workflows."
     )
 
     st.markdown("### Learning Insights")
     st.write(
-        "Created an interactive Power BI report to track student performance and recommend personalized interventions."
+        "Built an interactive Power BI report to track student performance and recommend personalized interventions."
     )
 
     st.markdown("### AI in Education")
     st.write(
-        "Investigated how AI tools can enhance learner engagement and deliver personalized digital learning experiences."
+        "Explored AI tools to enhance learner engagement and deliver data‑driven e‑learning experiences."
     )
 
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
 # Contact Page
-# ─────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────
 if page == "Contact":
     st.subheader("Contact Information")
     st.write("Feel free to reach out directly, or use the form below for inquiries.")
@@ -169,9 +124,65 @@ if page == "Contact":
     with st.form("contact_form"):
         name = st.text_input("Your Name")
         message = st.text_area("Your Message")
-        submitted = st.form_submit_button("Send")
-        if submitted:
+        if st.form_submit_button("Send"):
             st.success(f"Thank you, {name}. Your message has been received.")
+
+# ──────────────────────────────────────────────────────────
+# Scholarly Writing Page
+# ──────────────────────────────────────────────────────────
+if page == "Scholarly Writing":
+    st.subheader("Scholarly Writing")
+    # (content omitted for brevity; keep existing text from previous version)
+
+# ──────────────────────────────────────────────────────────
+# Cover Letter Page
+# ──────────────────────────────────────────────────────────
+if page == "Cover Letter":
+    st.subheader("Cover Letter")
+
+    today = date.today().strftime("%B %d, %Y")
+
+    cover_letter = f"""
+{today}
+
+Sravanthi Akutota  
+Denton, TX 76201  
+(940) 331‑4160  
+akutotasravanthi@gmail.com  
+
+Hiring Manager  
+[Company Name]  
+[Company Address]  
+
+Dear Hiring Manager,
+
+I am writing to express my enthusiasm for the **[Instructional Technology / Learning Experience Designer]** position at **[Company Name]**. As a graduate student completing a Master of Science in Learning Technologies at the University of North Texas (May 2025) and a former Associate Reviewer with Google AdWords, I bring a unique blend of instructional design expertise, data‑driven content management, and collaborative leadership.
+
+At Google AdWords, I evaluated large‑scale web content for quality and compliance, led trend analyses, and produced weekly process reports that improved turnaround efficiency by 15 percent. My ability to translate complex data into actionable insights directly aligns with your organization’s goal of creating evidence‑based learning solutions. In addition, my background in IT Network Analysis and Core Java enables me to communicate effectively with technical teams while maintaining a learner‑centered perspective.
+
+In my graduate studies, I have focused on applying Cognitive Load Theory and social‑constructivist principles to multimedia learning environments. Recent projects include developing five eLearning modules in Canvas LMS that supported more than 300 online students and producing instructional media to boost engagement across social platforms. These experiences demonstrate my commitment to leveraging technology, analytics, and creative design to craft high‑quality, inclusive learning experiences.
+
+My professional goals are to (1) design data‑driven instructional solutions that improve learner performance, (2) foster cross‑functional collaboration to ensure scalable content quality, and (3) champion continuous improvement through analytics and user feedback. Your organization’s emphasis on innovative learning technologies resonates strongly with these goals.
+
+Please review my attached résumé and online portfolio for additional details and sample work. I welcome the opportunity to discuss how my background in content analysis, instructional design, and project management can contribute to **[Company Name]**. Thank you for your time and consideration.
+
+Sincerely,
+
+Sravanthi Akutota  
+University of North Texas | M.S. Learning Technologies (May 2025)
+"""
+
+    st.markdown(
+        f"<div class='section' style='white-space: pre-wrap;'>{cover_letter}</div>",
+        unsafe_allow_html=True,
+    )
+
+    # Optional download of the cover letter as a .txt file
+    st.download_button(
+        "Download Cover Letter (TXT)",
+        cover_letter,
+        file_name="Sravanthi_Akutota_Cover_Letter.txt",
+    )
 
 # ---------------------------
 #       Scholarly Writing
