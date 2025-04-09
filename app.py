@@ -2,18 +2,18 @@ import streamlit as st
 import os
 from datetime import date
 
-# ---------------------------
-#   Page Configuration
-# ---------------------------
+# ─────────────────────────────────────────────
+# Page‑level settings
+# ─────────────────────────────────────────────
 st.set_page_config(
     page_title="Sravanthi Akutota | Portfolio",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ---------------------------
-#   Sidebar Navigation
-# ---------------------------
+# ─────────────────────────────────────────────
+# Sidebar navigation
+# ─────────────────────────────────────────────
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to",
@@ -27,9 +27,9 @@ page = st.sidebar.radio(
     ]
 )
 
-# ---------------------------
-#   Global CSS
-# ---------------------------
+# ─────────────────────────────────────────────
+# Global CSS
+# ─────────────────────────────────────────────
 st.markdown(
     """
     <style>
@@ -42,14 +42,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---------------------------
-#          Identity
-# ---------------------------
+# ─────────────────────────────────────────────
+# Identity Page
+# ─────────────────────────────────────────────
 if page == "Identity":
     st.markdown('<div class="title">Sravanthi Akutota</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="subtitle">M.S. in Learning Technologies | University of North Texas</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
     col1, col2 = st.columns([1, 3])
@@ -67,17 +67,16 @@ if page == "Identity":
             and Electronics Engineering and prior experience at Google AdWords to design data‑driven, learner‑centered solutions.
             </div>
             """,
-            unsafe_allow_html=True,
+            unsafe_allow_html=True
         )
 
-# ---------------------------
-#         Cover Letter
-# ---------------------------
+# ─────────────────────────────────────────────
+# Cover‑Letter Page
+# ─────────────────────────────────────────────
 if page == "Cover Letter":
     st.subheader("Cover Letter")
 
     today = date.today().strftime("%B %d, %Y")
-
     cover_letter = f"""
 **{today}**
 
@@ -88,34 +87,32 @@ Hiring Manager
 Dear Hiring Manager,
 
 I am writing to express my interest in the **Learning Technologies / Instructional Design** role at your organization.  
-As a graduate student in the Master of Science in Learning Technologies program at the University of North Texas—graduating May 2025—I have developed a solid foundation in instructional theory, multimedia design, and data‑driven evaluation. My enclosed portfolio highlights projects that integrate ADDIE and SAM methodologies with emerging technologies to deliver engaging learning solutions.
+As a graduate student in the Master of Science in Learning Technologies program at the University of North Texas—graduating **May 2025**—I have developed a solid foundation in instructional theory, multimedia design, and data‑driven evaluation. My enclosed portfolio highlights projects that integrate ADDIE and SAM methodologies with emerging technologies to deliver engaging learning solutions.
 
 During my tenure as an **Associate Reviewer at Google AdWords** (May 2021 – June 2023), I honed my ability to analyze complex data sets, evaluate content quality, and collaborate with cross‑functional teams. These responsibilities sharpened my attention to detail and reinforced the importance of iterative feedback—skills directly transferable to designing and refining e‑learning experiences. In addition, my technical proficiency with Adobe Creative Cloud, Core Java, and IT network analysis enables me to create media‑rich assets while ensuring robust system performance.
 
 Academically, courses such as *Learning & Cognition*, *Web Development*, and *Project Management* have expanded my expertise in both pedagogy and technology. I am particularly proud of a recent multimedia module (featured in my portfolio) that applies Cognitive Load Theory to streamline information processing for diverse learners.
 
 **Professional Goals**  
-My immediate goal is to join a forward‑thinking organization where I can:  
-
-* design evidence‑based digital learning products that improve learner outcomes,  
-* leverage analytics to iterate and personalize instruction, and  
-* contribute to a culture of continuous improvement through collaboration and research.  
+• Design evidence‑based digital learning products that improve learner outcomes  
+• Leverage analytics to iterate and personalize instruction  
+• Contribute to a culture of continuous improvement through collaboration and research  
 
 Long‑term, I aspire to lead instructional design teams that pioneer innovative, accessible learning ecosystems on a global scale.
 
-Thank you for considering my application. I would welcome the opportunity to discuss how my background in content management, data analysis, and instructional design aligns with your organization’s objectives. I can be reached at **940‑331‑4160** or **akutotasravanthi@gmail.com**.  
+Thank you for considering my application. I would welcome the opportunity to discuss how my background in content management, data analysis, and instructional design aligns with your organization’s objectives. I can be reached at **940‑331‑4160** or **akutotasravanthi@gmail.com**.
 
-Sincerely,
+Sincerely,  
 
 **Sravanthi Akutota**  
 Denton, TX 76201  
-[LinkedIn Profile]  
+[LinkedIn Profile]
 """
     st.markdown(cover_letter)
 
-# ---------------------------
-#          Resume
-# ---------------------------
+# ─────────────────────────────────────────────
+# Resume Page
+# ─────────────────────────────────────────────
 if page == "Resume":
     st.subheader("My Resume")
     st.markdown("Below is a PNG preview, along with a PDF download option.")
@@ -133,14 +130,14 @@ if page == "Resume":
                 label="Download Resume (PDF)",
                 data=file.read(),
                 file_name="Sravanthi_Resume.pdf",
-                mime="application/pdf",
+                mime="application/pdf"
             )
     else:
         st.warning("No PDF version available. Please add 'resume.pdf' to this folder if needed.")
 
-# ---------------------------
-#          Projects
-# ---------------------------
+# ─────────────────────────────────────────────
+# Projects Page
+# ─────────────────────────────────────────────
 if page == "Projects":
     st.subheader("Featured Projects")
 
@@ -159,9 +156,9 @@ if page == "Projects":
         "Investigated how AI tools can enhance learner engagement and deliver personalized digital learning experiences."
     )
 
-# ---------------------------
-#          Contact
-# ---------------------------
+# ─────────────────────────────────────────────
+# Contact Page
+# ─────────────────────────────────────────────
 if page == "Contact":
     st.subheader("Contact Information")
     st.write("Feel free to reach out directly, or use the form below for inquiries.")
