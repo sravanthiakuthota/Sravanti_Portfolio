@@ -203,7 +203,7 @@ University of North Texas | M.S. Learning Technologies (May 2025)
 """
 
     st.markdown(
-        f"<div class='section' style='white-space: pre-wrap;'>{cover_letter}</div>",
+        f"<div class='section' style='white-space: pre-wrap; color:#0d1b2a;'>{cover_letter}</div>",
         unsafe_allow_html=True,
     )
 
